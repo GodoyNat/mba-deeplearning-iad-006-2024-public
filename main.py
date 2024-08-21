@@ -22,7 +22,7 @@ class ImageRequest(BaseModel):
     # Carregamento do Modelo de Machine Learning
 def load_model():
     global xgb_model_carregado
-    with open("RandomFo.pkl", "rb") as f:
+    with open("./notebooks/RandomFo.pkl", "rb") as f:
         xgb_model_carregado = pickle.load(f)
 
 # Inicialização da Aplicação
@@ -47,7 +47,7 @@ async def predict(request: ImageRequest):
     img_array = img_array.reshape(1, -1)
 
     # Predição do Modelo de Machine Learning
-    prediction = RandomFo_carregado.predict(img_array)
+    prediction = xgb_model_carregado.predict(img_array)
     return {"prediction": prediction}
 
 # Endpoint de Healthcheck
